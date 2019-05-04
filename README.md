@@ -4,10 +4,10 @@
 <pre>
 docker -v
 docker --version
-</pre>
 # もっと詳しく見たい時
-docker version
+docker version</pre>
 # 💻 Dockerイメージとコンテナの基本
+<pre>
 # イメージを探す
 docker search python
 
@@ -50,12 +50,16 @@ docker container exec -it {XXXX} /bin/bash
 # コンテナの削除...XXXXは`CONTAINER ID`または`NAMES`
 # -fは強制削除のオプション
 docker container rm -f {XXXX}
-Dockerfileで開発環境を整える
+</pre>
+# Dockerfileで開発環境を整える
 💻 DockerfileでPythonイメージをつくる
-01/
+<pre>01/
 ├── Dockerfile
 ├── script.py
-└── requirements.txt
+└── requirements.txt</pre>
+<p></p>
+
+<pre>
 # イメージのビルド
 # docker image build -t {IMAGE_NAME}:{TAG} {PATH}
 docker image build -t my_python:v1 .
@@ -67,14 +71,18 @@ docker container run -dt --name my_python my_python:v1
 
 # コンテナへADDしたPythonスクリプトを実行
 docker container exec -it my_python python script.py
+</pre>
 💻 ボリュームのマウント
+<pre>
 # ホストのディレクトリをボリュームとして、コンテナへマウントする
 docker container run -dt --name my_python -v $(pwd):/code my_python:v1
-イメージの公開
+</pre>
+# イメージの公開
 💻 作ったイメージをDocker Hubに登録
-# docker image push [option] {REPOSITORY_NAME}:{TAG}
-運用管理向けのコマンド
+<pre># docker image push [option] {REPOSITORY_NAME}:{TAG}</pre>
+# 運用管理向けのコマンド
 💻 コンテナの利用状況確認やお掃除
+<pre>
 # コンテナの利用状況の取得
 docker container stats
 
@@ -88,17 +96,21 @@ docker image prune
 
 # イメージ、ボリューム、ネットワークなど、全てお掃除
 docker system prune
-Docker Composeでマルチコンテナを実行する
+</pre>
+# Docker Composeでマルチコンテナを実行する
 💻 バージョンの確認
 docker desktop for Windows/Macならdocker-composeですぐに使える。
 Linuxは別途インストールが必要。
-
-docker-compose -v
+<pre>
+docker-compose -v</pre>
 💻 Python/Django + PostgreSQLの開発環境構築
+<pre>
 02/
 ├── Dockerfile
 ├── docker-compose.yml
-└── requirements.txt
+└── requirements.txt</pre>
+<p></p>
+<pre>
 # YMLの記述に沿ってコンテナをポコポコ並べる
 docker-compose up
 
@@ -118,13 +130,17 @@ docker container exec -it django_web python docker_hands_on/manage.py runserver 
 # ブラウザで `localhost:8000` へアクセス
 
 # コンテナを落とす
-docker-compose down
-永続化データの扱い
+docker-compose down</pre>
+# 永続化データの扱い
 💻 ボリュームをマウントしてDBのデータを保存する
+<pre>
 03/
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
+</pre>
+<p></p>
+<pre>
 # docker-compose.yml
 # 下記コードで、データ保存用のVOLUMEがマウントされる
 
@@ -140,4 +156,4 @@ volumes:
 docker-compose up -d
 
 # ボリュームのリスト表示
-docker volume ls
+docker volume ls</pre>
